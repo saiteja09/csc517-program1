@@ -54,15 +54,79 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  # Run `rake routes` to list all generated routes
+
   # Index Page
   root 'index#index'
 
   # Users
-  get 'create_student' => 'students#new'
-  resources :students
+  resources :users do
+    # Passwords
+    member do
+      get 'password' => 'users#edit_password'
+      put 'password' => 'users#update_password'
+      get 'delete' => 'users#delete'
+    end
+  end
 
-  # Authentication
+  # Students
+  resources :students, only: [:new, :create]
+
+  # Authentication - Non RESTful
   get 'login' => 'authentication#new'
   post 'login' => 'authentication#create'
   delete 'logout' => 'authentication#destroy'
+
+  # Courses
+  resources :courses do
+    # Enrollment requests
+    resources :students, only: [] do
+      member do
+        post 'enrollment' => 'enrollment#create'
+      end
+    end
+
+    member do
+      get 'delete' => 'courses#delete'
+    end
+
+    # List student courses
+    collection do
+      get 'my' => 'courses#my', as: 'my'
+      get 'inactivate' => 'courses#inactivate'
+      delete 'toggleactivation' => 'courses#toggleactivation'
+    end
+  end
+
+  get 'enrollment' => 'enrollment#index'
+  put 'enrollment' => 'enrollment#update'
+
+  # Course History
+  get 'history' => 'history#index'
+  get 'history/:id'=> 'history#show'
+  post 'history' => 'history#create'
+  delete 'history' => 'history#destroy'
+
+
+  #get 'grade' => 'grade#index'
+
+  resources :grade, only: [:new, :create, :index]
+
+  resources :course_material, only: [:new, :create, :index, :edit, :update]
+
+  # Messages
+  resources :messages, only: [:index, :show] do
+    resources :posts, only: [:new, :create]
+  end
+
+  resources :users, only: [] do
+    resources :messages, only: [:new, :create]
+  end
+
+  # Admins
+  resources :admins, except: [:edit] do
+    member do
+      get 'delete' => 'admins#delete'
+    end
+  end
 end

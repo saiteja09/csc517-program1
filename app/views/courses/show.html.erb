@@ -1,0 +1,35 @@
+<% if @history && @history.is_current %>
+  <div class="well">
+    <%= link_to 'Drop Course', history_path(id: @history), method: 'delete' %>
+  </div>
+<% elsif @history %>
+  <div class="well">
+    Course is not active or has been dropped
+  </div>
+<% elsif @request %>
+  <div class="well">
+    Enrollment Request pending
+  </div>
+<% elsif @auth_user.type == 'Student' %>
+  <div class="well">
+    <%= link_to 'Request Enrollment', enrollment_course_student_path(@course.id, @auth_user.id), method: 'post' %>
+  </div>
+<% end %>
+<% if @history && @history.is_current %>
+    <div class="well">
+      <%= link_to 'Send message to instructor', new_user_message_path(@course.instructor) %>
+    </div>
+<% end %>
+<% if @grade %>
+  <div class="well">
+    Student Grade: <%= @grade.gradeletter %>
+  </div>
+<% end %>
+<%= render 'courses/course', course: @course %>
+<br/>
+<h3>Course Materials</h3>
+
+<% CourseMaterial.where(course_id: @course.id).find_each do |c|%>
+    <%= render 'course_material/course_material', course: c %>
+    <br/>
+<% end %>

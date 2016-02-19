@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%
+      link_text = 'Correspondence With ' +
+          (@auth_user == message.instructor ? message.student.name : message.instructor.name)
+    %>
+    <%= link_to link_text, message_path(message) %>
+  </div>
+  <div class="panel-body">
+    <%= message.subject %>
+  </div>
+</div>

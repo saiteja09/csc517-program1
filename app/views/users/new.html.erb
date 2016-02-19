@@ -1,0 +1,8 @@
+<%= bootstrap_form_for @user do |f| %>
+  <%= f.text_field :name %>
+  <%= f.email_field :email %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.select :type, ['Student', 'Instructor'] %>
+  <%= f.submit 'Create User' %>
+<% end %>

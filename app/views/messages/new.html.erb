@@ -1,0 +1,5 @@
+<%= bootstrap_form_tag url: user_messages_path, method: 'post' do |f| %>
+  <%= f.text_field :subject %>
+  <%= f.text_area :content %>
+  <%= f.submit 'Send Message' %>
+<% end %>

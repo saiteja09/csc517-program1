@@ -1,0 +1,4 @@
+<%= bootstrap_form_for @post, url: message_posts_path, method: 'post' do |f| %>
+    <%= f.text_area :content, label: 'Reply' %>
+    <%= f.submit 'Send Reply' %>
+<% end %>

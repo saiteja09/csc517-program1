@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <!-- Default panel headin -->
+      <% task = Task.find_by_id course.task_id %>
+      <div class="panel-heading">
+        <%= label_tag task.title %>
+      </div>
+
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <td class="col-xs-1">Description</td><td class="col-xs-5"><%= task.description %></td>
+        </tr>
+
+        <tr>
+          <td class="col-xs-1">Deadline</td><td class="col-xs-5"><%= task.deadline %></td>
+        </tr>
+
+      </table>
+</div>

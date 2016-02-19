@@ -1,0 +1,34 @@
+<h4 style="text-align: center"> Remove Students from Course</h4>
+<div class="well">
+  <%= bootstrap_form_tag url:history_path ,method: 'get' do |f|%>
+      <%= f.select 'id',options_from_collection_for_select(@courses, :id, :title, params[:id]), {:prompt => "Select Course"}%>
+      <%= f.submit 'Get Students', class: 'btn btn-default' %>
+  <% end %>
+</div>
+
+<% if params[:id] != nil %>
+    <div class="panel panel-default">
+      <table class="table">
+        <thead class="panel-heading">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <% @users.each do |u| %>
+          <% @history_record = History.where course_id: params[:id], is_current: true, user: u %>
+          <tr>
+            <td><%= u.name %></td>
+            <td><%= u.email %></td>
+            <td>
+              <%= bootstrap_form_tag url:history_path(:id => @history_record.ids[0], :courseid => params[:id]) ,method: 'delete' do |f|%>
+                <%= f.submit 'Remove', class: 'btn btn-danger' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+<% end %>
+

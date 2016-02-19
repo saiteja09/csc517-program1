@@ -1,0 +1,14 @@
+<%= link_to '<< Back to List', admins_path %>
+
+<div class="admins delete">
+  <h2>Delete Admin</h2>
+
+  <% if !@admin.deletable || @admin.id == session[:user_id]%>
+      <div class="one"><p>You cannot delete this admin.</p></div>
+  <% else %>
+      <div class="one"><p>Are you sure you want to delete this admin?</p></div>
+      <div class="form-buttons">
+        <%= link_to 'Delete', admin_path, method: 'delete', class: 'btn btn-default' %>
+      </div>
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<h4 style="text-align: center">Add Course Material</h4>
+<div class="well">
+  <%= bootstrap_form_tag url:course_material_index_path ,method: 'post' do |f|%>
+    <% title = Course.find_by_id(params[:id]) %>
+      <%= f.text_field :title, :placeholder => 'Title' %>
+      <%= f.text_area :description, :placeholder => 'Description' %>
+      <label>Deadline</label>
+      <div class='input-group date' id='datetimepicker1'>
+        <input placeholder="mm/dd/yyyy hh:mm" class="form-control" name="deadline" id="deadline" type="text">
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+      </div>
+      <script type="text/javascript">
+        $(function () {
+          $('#datetimepicker1').datetimepicker();
+        });
+      </script>
+      <br/>
+      <%= f.submit 'Post Material', class: 'btn'%>
+      <% session[:courseid] = title.id %>
+  <% end %>
+</div>

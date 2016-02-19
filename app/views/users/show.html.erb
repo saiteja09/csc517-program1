@@ -1,0 +1,17 @@
+<%= link_to '<< Back to List', users_path %>
+
+<div class="well">
+  <h3>Current </h3>
+</div>
+<% @current.each do |c| %>
+    <%= render 'courses/course', course: c %>
+<% end %>
+
+<% if @past %>
+  <div class="well">
+    <h3>Past</h3>
+  </div>
+  <% @past.each do |c| %>
+      <%= render 'courses/course', course: c %>
+  <% end %>
+<% end %>

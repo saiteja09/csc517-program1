@@ -25,6 +25,6 @@ class StudentsController < ApplicationController
 
     end
 
-    redirect_to create_student_path
+    redirect_to new_student_path
   end
 end

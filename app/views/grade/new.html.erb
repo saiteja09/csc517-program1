@@ -1,0 +1,15 @@
+<%= bootstrap_form_tag url:'/grade'  do |f| %>
+
+    <%= f.text_field :name, :value => params[:username] %>
+
+    <%= f.hidden_field :course_id, :value => params[:course_id] %>
+
+    <%= f.email_field :email, :value => params[:user_email] %>
+
+    <%= f.hidden_field :history_id, :value => params[:id] %>
+
+    <%= f.text_field :grade, :id => :grades, :placeholder => 'Enter the grade' %>
+
+    <%= f.submit 'Save', class: 'btn btn-success'%>
+
+<% end %>

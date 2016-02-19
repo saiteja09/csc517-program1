@@ -1,4 +1,4 @@
-# Authentication controller for user login/logout
+# Authentication controller for users login/logout
 class AuthenticationController < ApplicationController
   # Don't require login for Authentication
   skip_before_action :require_auth
@@ -8,7 +8,7 @@ class AuthenticationController < ApplicationController
 
   end
 
-  # Authenticate user
+  # Authenticate users
   def create
     attrs = params[:session]
     @user = User.find_by_email attrs[:email]

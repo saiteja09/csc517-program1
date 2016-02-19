@@ -1,0 +1,7 @@
+<div class="well">
+  <%= @message.subject %>
+</div>
+<% @posts.each do |p| %>
+  <%= render 'messages/post', post: p %>
+<% end %>
+<%= link_to 'Reply', new_message_post_path(@message), class: 'btn btn-default' %>

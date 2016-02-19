@@ -1,0 +1,27 @@
+<div class="admins index">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Admins
+    </div>
+    <div class="panel-body">
+      <%= link_to 'Add new Admin', new_admin_path %>
+      <table class="listing table" summary="Admin list">
+        <tr class="header">
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th colspan="2">Actions</th>
+        </tr>
+        <% @admins.each do |admin| %>
+            <tr>
+              <td><%= admin.id %></td>
+              <td><%= admin.name %></td>
+              <td><%= admin.email %></td>
+              <td><%= link_to 'Show', admin_path(admin) %></td>
+              <td><%= link_to 'Delete', delete_admin_path(admin) %></td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

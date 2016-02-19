@@ -1,0 +1,31 @@
+<h4 style="text-align: center">Post Grades</h4>
+<div class="well">
+  <%= bootstrap_form_tag url:grade_index_path ,method: 'get' do |f|%>
+      <%= f.select 'id',options_from_collection_for_select(@courses, :id, :title, params[:id]), {:prompt => "Select Course"}%>
+      <%= f.submit 'Get Students', class: 'btn btn-default' %>
+  <% end %>
+</div>
+
+<% if params[:id] != nil %>
+    <div class="panel panel-default">
+      <table class="table">
+        <thead class="panel-heading">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <% @users.each do |u| %>
+            <% @history_record = History.find_by_sql('SELECT * from histories WHERE course_id = ' + params[:id] + ' and is_current=true and user_id = ' + u.id.to_s)%>
+            <tr>
+              <td><%= u.name %></td>
+              <td><%= u.email %></td>
+              <td>
+                <%= link_to 'Post Grade', new_grade_path(:id => @history_record, :username => u.name, :user_email => u.email, :user_id => u.id, :course_id => params[:id]), :class => 'btn btn-default' %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+<% end %>

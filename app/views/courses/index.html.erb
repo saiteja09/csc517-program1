@@ -1,0 +1,23 @@
+<div class="well">
+  <% if (@auth_user.type == 'Admin') %>
+    <%= link_to("Add new Course", {:action => 'new'}, :class => 'action new') %>
+  <% end %>
+
+  <%= bootstrap_form_tag url: courses_path, method: 'get' do |f|%>
+    <% label = 'Filter'; label += " - #{params[:like]}" if params[:like] && !params[:like].empty? %>
+    <%= f.text_field 'like', label: label, placeholder: 'Filter by course number, title, instructor, description' %>
+    <%= f.check_box 'status', label: 'Active', :checked => params[:status] ? to_bool(params[:status]) : true %>
+    <%= f.submit 'Filter' %>
+    <%= link_to 'Clear Filter', courses_path, class: 'btn btn-default' %>
+  <% end %>
+</div>
+
+<% if flash[:notice] %>
+    <br/>
+    <div class="notice" style="color: #B00100"><%= flash[:notice] %></div>
+    <br/>
+<% end %>
+
+<% @courses.each do |c| %>
+  <%= render 'courses/course', course: c %>
+<% end %>

@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+  <!-- Default panel heading -->
+  <div class="panel-heading">
+    <%= link_to course.coursenumber + ' - ' + course.title, course_path(course) %>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <tr>
+      <td class="col-md-4">Instructor</td><td class="col-md-8"><%= course.instructor.name %></td>
+    </tr>
+
+    <tr>
+      <td class="col-md-4">Start Date</td><td class="col-md-8"><%= course.start_date %></td>
+    </tr>
+
+    <tr>
+      <td class="col-md-4">End Date</td><td class="col-md-8"><%= course.end_date %></td>
+    </tr>
+
+    <tr>
+      <td class="col-md-4">Status</td><td class="col-md-8"><%= course.status ? 'Active' : 'Inactive' %></td>
+    </tr>
+
+    <tr>
+      <td class="col-md-4">Description</td><td class="col-md-8"><%= course.description %></td>
+    </tr>
+
+    <% if (@auth_user.type == 'Admin') %>
+    <tr>
+      <td class="col-md-4">
+        <%= link_to("Delete Course", delete_course_path(course), :class => 'btn btn-danger') %>
+        <% if course.inactivation_requested == true && course.status == true %>
+          <%= link_to("Inactivate Course", toggleactivation_courses_path(course), :class => 'btn btn-danger', method: 'delete') %>
+      <% elsif course.inactivation_requested == false && course.status == false%>
+          <%= link_to("Activate Course", toggleactivation_courses_path(course), :class => 'btn btn-success', method: 'delete') %>
+      <% end %>
+
+        <%= link_to("Edit Course", edit_course_path(course), :class => 'btn btn-default') %>
+      </td>
+      <td class="col-md-8">
+        <%= link_to("Post Grades", grade_index_path(:id => course), :class => 'btn btn-default') %>
+
+
+        <%= link_to("Add Students", enrollment_path(:id => course), :class => 'btn btn-default') %>
+
+
+        <%= link_to("Remove Students", history_path(:id => course), :class => 'btn btn-default') %>
+
+
+        <%= link_to("Add/Edit Course Material", course_material_index_path(id: course), :class => 'btn btn-default') %>
+      </td>
+    </tr>
+
+    <% end %>
+  </table>
+</div>

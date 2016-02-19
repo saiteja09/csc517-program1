@@ -1,0 +1,13 @@
+<%= link_to '<< Back to List', admins_path %>
+
+<%= bootstrap_form_for @admin, method: 'post' do |f| %>
+    <%= f.text_field :name, :placeholder => 'Full Name' %>
+
+    <%= f.email_field :email, :placeholder => 'User Email' %>
+
+    <%= f.password_field :password, :placeholder => 'Password' %>
+
+    <%= f.password_field :confirm_password, :placeholder => 'Confirm Password' %>
+
+    <%= f.submit 'Add' %>
+<% end %>

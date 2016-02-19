@@ -1,0 +1,13 @@
+<h4 style="text-align: center">In-activate Courses</h4>
+<div class="well">
+  <%= bootstrap_form_tag url: inactivate_courses_path, method: 'get' do |f|%>
+      <%= f.select 'id',options_from_collection_for_select(@courses, :id, :title, params[:id]), {:prompt => "Select Course"}%>
+      <%= f.submit 'Inactivate Course', class: 'btn btn-danger' %>
+  <% end %>
+</div>
+
+<% if params[:inactivated] == 'true' %>
+    <div>
+      <label for="inactive">Request for Inactivation submitted</label>
+    </div>
+<%end %>

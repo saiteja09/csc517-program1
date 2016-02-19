@@ -1,0 +1,9 @@
+<%= link_to '<< Back to List', courses_path %>
+
+<div class="courses delete">
+  <h2>Delete Course</h2>
+      <div class="one"><p>Are you sure you want to delete this course?</p></div>
+      <div class="form-buttons">
+        <%= link_to 'Delete', course_path, method: 'delete', class: 'btn btn-default' %>
+      </div>
+</div>
