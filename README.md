@@ -37,6 +37,7 @@ The default admin account cannot be deleted. Authentication information is
 user: admin@portal.net
 pass: 3YP)g14*
 ```
+**DO NOT CHANGE THESE CREDENTIALS.** Our reviewers are having trouble logging in because previous users have changed them.
 
 ## Usage
 ### Account Creation

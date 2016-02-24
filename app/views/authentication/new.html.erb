@@ -1,3 +1,8 @@
+<div class="alert alert-danger">
+  <p>
+    If you cannot log in using the credentials provided in the README please open an issue on our GitHub page.
+  </p>
+</div>
 <%= bootstrap_form_for :session, url: login_path do |f| %>
   <%= f.email_field :email %>
   <%= f.password_field :password %>
